@@ -1,4 +1,4 @@
-import { students } from './data/all-data.js';
+// import { students } from './data/all-data.js';
 
 let leftSide = document.getElementById('left-side');
 let leftSideList = document.createElement('ul');
@@ -9,29 +9,34 @@ leftSideList.classList.add('list-unstyled');
 // Direct style assignment
 leftSideList.style.cursor = 'pointer';
 
-for (let student of students) {
-  // console.log(student.firstName + ' ' + student.lastName);
-  // console.log(`${student.firstName} ${student.lastName}`);
-  leftSideList.insertAdjacentHTML(
-    'beforeend',
-    `<li id="${student.id}">${student.firstName} ${student.lastName}</li>`
-  );
-}
+fetch('http://localhost:8000/students')
+.then((response) => response.json())
+.then((data) => {
+  console.log(data);
+  for (let student of data) {
+    leftSideList.insertAdjacentHTML(
+      'beforeend',
+      `<li id="${student.id}">${student.firstName} ${student.lastName}</li>`
+    );
+  }
+});
 
 // Event delegation!
-leftSideList.addEventListener('click', (event) => {
+leftSideList.addEventListener("click", async (event) => {
   let studentId = event.target.id;
-  let student = students.find((s) => s.id === Number(studentId));
-  // let student = students.find((s) => s.id == studentId);
-  // console.log('You clicked on:', student);
-
-  let rightSide = document.getElementById('right-side');
-  let studentDetails = document.createElement('div');
-  studentDetails.insertAdjacentHTML(
-    'beforeend',
-    `<p>${student.firstName} ${student.lastName} lives in ${student.city}, ${student.province}`
-  );
-  rightSide.replaceChildren(studentDetails);
+  await fetch('http://localhost:8000/students/' + studentId)
+  .then((response) => response.json())
+  .then((student) => {
+    console.log('You clicked on:', student);
+    
+    let rightSide = document.getElementById('right-side');
+    let studentDetails = document.createElement('div');
+    studentDetails.insertAdjacentHTML(
+      'beforeend',
+      `<p>${student.firstName} ${student.lastName} lives in ${student.city}, ${student.province}`
+    );
+    rightSide.replaceChildren(studentDetails);
+  });
 });
 
 leftSide.append(leftSideList);
