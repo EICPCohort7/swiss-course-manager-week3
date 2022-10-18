@@ -51,19 +51,27 @@ function renderStudents(students) {
   }
   // Event delegation!
   leftSideList.addEventListener('click', async (event) => {
-    let studentId = event.target.dataset.studentId;
-    let student = await fetchStudentById(Number(studentId));
+    try {
+      let studentId = event.target.dataset.studentId;
+      let student = await fetchStudentById(Number(studentId));
 
-    let details = new StudentDetails(student);
-    details.renderTo(rightSide);
+      let details = new StudentDetails(student);
+      details.renderTo(rightSide);
+    } catch (error) {
+      console.error('Error trying to fetch student details:', error);
+    }
   });
 
   leftSide.append(leftSideList);
 }
 
 async function main() {
-  let students = await fetchAllStudents();
-  renderStudents(students);
+  try {
+    let students = await fetchAllStudents();
+    renderStudents(students);
+  } catch (error) {
+    console.error('Error fetching and rendering students:', error.message);
+  }
 }
 
 main();
