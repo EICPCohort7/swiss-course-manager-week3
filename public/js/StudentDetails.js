@@ -14,16 +14,22 @@ export class StudentDetails {
   #buildPrefix(printLabels, field) {
     let prefix = '';
     if (printLabels) {
-      prefix = this.#dataFields[field];
+      if (field === 'province' && this.student.country === 'US') {
+        prefix = 'State';
+      } else {
+        prefix = this.#dataFields[field];
+      }
       prefix += ': ';
     }
     return prefix;
   }
+  // * @param {string | Element} dest Either an id of an existing element, or an actual Element reference
 
   /**
-   *
-   * @param {string | Element} dest Either an id of an existing element, or an actual Element reference
-   * @returns null on 'dest' not found
+   * @typedef {{printLabels: boolean}} RenderToArgs
+   * @param {string | Element} dest Element or id of element to render to
+   * @param {RenderToArgs} options
+   * @returns
    */
   renderTo(dest, options = {}) {
     let target = null;
