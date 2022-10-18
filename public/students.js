@@ -1,37 +1,69 @@
-import { students } from './data/all-data.js';
+import { StudentDetails } from './js/StudentDetails.js';
 
-let leftSide = document.getElementById('left-side');
-let leftSideList = document.createElement('ul');
+let rootUrl = 'http://localhost:8000/students';
 
-/** @see {https://developer.mozilla.org/en-US/docs/Web/API/Element/classList} */
-leftSideList.classList.add('list-unstyled');
-
-// Direct style assignment
-leftSideList.style.cursor = 'pointer';
-
-for (let student of students) {
-  // console.log(student.firstName + ' ' + student.lastName);
-  // console.log(`${student.firstName} ${student.lastName}`);
-  leftSideList.insertAdjacentHTML(
-    'beforeend',
-    `<li id="${student.id}">${student.firstName} ${student.lastName}</li>`
-  );
+function fetchAllStudents() {
+  return fetch(rootUrl).then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      if (response.status === 404) {
+        throw new Error('Could not find students');
+      } else {
+        throw new Error('Bad response on fetching students');
+      }
+    }
+  });
 }
 
-// Event delegation!
-leftSideList.addEventListener('click', (event) => {
-  let studentId = event.target.id;
-  let student = students.find((s) => s.id === Number(studentId));
-  // let student = students.find((s) => s.id == studentId);
-  // console.log('You clicked on:', student);
+function fetchStudentById(id) {
+  return fetch(`${rootUrl}/${id}`).then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      if (response.status === 404) {
+        throw new Error(`Could not find student with the id ${id}`);
+      } else {
+        throw new Error(`Bad response on fetching student id ${id}`);
+      }
+    }
+  });
+}
 
+function renderStudents(students) {
+  let leftSide = document.getElementById('left-side');
   let rightSide = document.getElementById('right-side');
-  let studentDetails = document.createElement('div');
-  studentDetails.insertAdjacentHTML(
-    'beforeend',
-    `<p>${student.firstName} ${student.lastName} lives in ${student.city}, ${student.province}`
-  );
-  rightSide.replaceChildren(studentDetails);
-});
+  let leftSideList = document.createElement('ul');
 
-leftSide.append(leftSideList);
+  /** @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/classList} */
+  leftSideList.classList.add('list-unstyled');
+
+  // Direct style assignment
+  leftSideList.style.cursor = 'pointer';
+
+  for (let student of students) {
+    // console.log(student.firstName + ' ' + student.lastName);
+    // console.log(`${student.firstName} ${student.lastName}`);
+    leftSideList.insertAdjacentHTML(
+      'beforeend',
+      `<li data-student-id="${student.id}">${student.firstName} ${student.lastName}</li>`
+    );
+  }
+  // Event delegation!
+  leftSideList.addEventListener('click', async (event) => {
+    let studentId = event.target.dataset.studentId;
+    let student = await fetchStudentById(Number(studentId));
+
+    let details = new StudentDetails(student);
+    details.renderTo(rightSide);
+  });
+
+  leftSide.append(leftSideList);
+}
+
+async function main() {
+  let students = await fetchAllStudents();
+  renderStudents(students);
+}
+
+main();
