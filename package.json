@@ -4,7 +4,7 @@
   "description": "Starter for the Course Manager project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:jest": "jest",
     "lint": "eslint public/js/**/*.js",
     "server:json": "json-server --watch --port 8000 public/data/all-data.json",
     "server:root": "http-server public -p 3000 --cors -c-1"
