@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <title>Students</title>
+  </head>
+  <body>
+    <!-- main.container>.row>.col*2 -->
+    <main class="container">
+      <header class="row">
+        <div class="col">
+          <h1>Students</h1>
+          <hr />
+        </div>
+      </header>
+      <div class="row">
+        <div class="col">
+          <ul class="list-inline">
+            <li class="list-inline-item">
+              <a href="/">Home</a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" style="font-weight: bold">List All Students</a>
+            </li>
+            <li class="list-inline-item"><a href="add-student.html">Add a Student</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3" id="left-side"></div>
+        <div class="col" id="right-side">
+          <p>Student details go here</p>
+        </div>
+      </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="students.js" type="module"></script>
+  </body>
+</html>
