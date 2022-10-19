@@ -24,6 +24,16 @@ export class StudentDetails {
     return prefix;
   }
 
+  // console.log(details.getDataFields());
+  getDataFields() {
+    return this.#dataFields;
+  }
+
+  // console.log(details.dataFields)
+  get dataFields() {
+    return this.#dataFields;
+  }
+
   /**
    * @typedef {{printLabels: boolean}} RenderToArgs
    * @param {string | Element} dest Element or id of element to render to
@@ -45,6 +55,7 @@ export class StudentDetails {
       target = dest;
     }
 
+    // Object destructuring
     let { firstName, lastName } = this.student;
     let card = document.createElement('div');
     card.classList.add('card');
@@ -55,8 +66,23 @@ export class StudentDetails {
     let list = document.createElement('ul');
     list.classList.add('list-group', 'list-group-flush');
 
+    /* Hard-coded version
+    list.insertAdjacentHTML(
+      'beforeend',
+      `
+      <li class="list-group-item">${this.student.email}</li>
+      <li class="list-group-item">${this.student.phoneNumber}</li>
+      <li class="list-group-item">${this.student.city}</li>
+      <li class="list-group-item">${this.student.province}</li>
+      <li class="list-group-item">${this.student.country}</li>
+      `
+    );
+    */
+
+    // Render out a list item for each field in this.#dataFields
     for (let field of Object.keys(this.#dataFields)) {
       let prefix = this.#buildPrefix(options.printLabels, field);
+      // e.g. should not print a province when there isn't one
       if (this.student[field]) {
         list.insertAdjacentHTML(
           'beforeend',
@@ -64,6 +90,7 @@ export class StudentDetails {
         );
       }
     }
+
     card.insertAdjacentElement('beforeend', list);
     target.replaceChildren(card);
   }

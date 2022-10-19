@@ -60,6 +60,7 @@ describe('StudentDetails', () => {
     expect(details).not.toBeNull();
   });
 
+  // Stock unit testing, no testing-library
   describe('Unit tests', () => {
     test('should not render province property', () => {
       let details = new StudentDetails(ukStudent);
@@ -69,17 +70,23 @@ describe('StudentDetails', () => {
       let listItems = container.querySelectorAll('li');
       expect(listItems.length).toBe(4); // Would be 5 if "province" printed
     });
+
+    test('should render province as "State" for a US student', () => {
+      let details = new StudentDetails(usStudent);
+      details.renderTo(container);
+
+      let listItem = container.querySelector('li:nth-child(4)');
+      expect(listItem.textContent).toBe(usStudent.province);
+    });
   });
 
+  // Uses testing-library to test from the perspective of the UI
   describe('UI tests', () => {
     test('Simple render', () => {
       let details = new StudentDetails(canadaStudent);
       details.renderTo(container);
-      let header = getByText(container, `${canadaStudent.firstName} ${canadaStudent.lastName}`, {
-        exact: false,
-      });
+      let header = getByText(container, `${canadaStudent.firstName} ${canadaStudent.lastName}`);
 
-      console.log('Header:', header);
       expect(header).toBeInTheDocument();
     });
 
@@ -94,14 +101,19 @@ describe('StudentDetails', () => {
       let details = new StudentDetails(canadaStudent);
       details.renderTo(container, { printLabels: true });
       let results = queryByText(container, 'Province', { exact: false });
+      expect(results).not.toBeNull();
       expect(results).toBeInTheDocument();
     });
 
+    // Maybe map this to some sort of requirements docs
+    // test('Requirement Student-0156', () => {
     test('should render province property as "State"', () => {
       let details = new StudentDetails(usStudent);
       details.renderTo(container, { printLabels: true });
       let results = queryByText(container, 'State', { exact: false });
+      expect(results).not.toBeNull();
       expect(results).toBeInTheDocument();
+      expect(results.textContent).toMatch(usStudent.province);
     });
   });
 });
