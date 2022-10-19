@@ -42,8 +42,6 @@ function renderStudents(students) {
   leftSideList.style.cursor = 'pointer';
 
   for (let student of students) {
-    // console.log(student.firstName + ' ' + student.lastName);
-    // console.log(`${student.firstName} ${student.lastName}`);
     leftSideList.insertAdjacentHTML(
       'beforeend',
       `<li data-student-id="${student.id}">${student.firstName} ${student.lastName}</li>`

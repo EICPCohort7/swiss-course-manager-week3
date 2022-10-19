@@ -23,7 +23,6 @@ export class StudentDetails {
     }
     return prefix;
   }
-  // * @param {string | Element} dest Either an id of an existing element, or an actual Element reference
 
   /**
    * @typedef {{printLabels: boolean}} RenderToArgs
