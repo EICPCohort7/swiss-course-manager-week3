@@ -54,12 +54,18 @@
               <input type="text" name="city" id="city" class="form-control" />
             </div>
             <div class="mb-2">
-              <label for="province" class="form-label">State/Province</label>
-              <input type="text" name="province" id="province" class="form-control" />
+              <label for="country" class="form-label">Country</label>
+              <select name="country" id="country" class="form-select">
+                <option value="CA">Canada</option>
+                <option value="UK">United Kingdom</option>
+                <option value="US">United States</option>
+              </select>
             </div>
             <div class="mb-2">
-              <label for="country" class="form-label">Country</label>
-              <input type="text" name="country" id="country" class="form-control" />
+              <label for="province" class="form-label">State/Province</label>
+              <select name="province" id="province">
+                <option value="">Select a country</option>
+              </select>
             </div>
             <div class="mb-2">
               <label for="postal-code" class="form-label">Zip/Postal Code</label>
