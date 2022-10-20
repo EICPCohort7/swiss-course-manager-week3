@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <title>Add a student</title>
+  </head>
+  <body>
+    <main class="container">
+      <header class="row">
+        <div class="col">
+          <h1>Students</h1>
+          <hr />
+        </div>
+      </header>
+      <div class="row">
+        <div class="col">
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="students.html">List All Students</a></li>
+            <li class="list-inline-item">
+              <a href="#" style="font-weight: bold">Add a Student</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <form>
+            <!-- div>label.form-label+input:text.form-control -->
+            <div class="mb-2">
+              <label for="first-name" class="form-label">First Name</label>
+              <input type="text" name="firstName" id="first-name" class="form-control" />
+            </div>
+            <div class="mb-2">
+              <label for="last-name" class="form-label">Last Name</label>
+              <input type="text" name="lastName" id="last-name" class="form-control" />
+            </div>
+            <div class="mb-2">
+              <label for="date-of-birth" class="form-label">Date of Birth</label>
+              <input type="text" name="dateOfBirth" id="date-of-birth" class="form-control" />
+            </div>
+            <div class="mb-2">
+              <label for="email" class="form-label">E-mail</label>
+              <input type="email" name="email" id="email" class="form-control" />
+            </div>
+            <div class="mb-2">
+              <label for="phone-number" class="form-label">Phone Number</label>
+              <input type="text" name="phoneNumber" id="phone-number" class="form-control" />
+            </div>
+            <div class="mb-2">
+              <label for="city" class="form-label">City</label>
+              <input type="text" name="city" id="city" class="form-control" />
+            </div>
+            <div class="mb-2">
+              <label for="province" class="form-label">State/Province</label>
+              <input type="text" name="province" id="province" class="form-control" />
+            </div>
+            <div class="mb-2">
+              <label for="country" class="form-label">Country</label>
+              <input type="text" name="country" id="country" class="form-control" />
+            </div>
+            <div class="mb-2">
+              <label for="postal-code" class="form-label">Zip/Postal Code</label>
+              <input type="text" name="postalCode" id="postal-code" class="form-control" />
+            </div>
+            <div class="mb-2">
+              <label for="department" class="form-label">Department</label>
+              <input type="text" name="departmentId" id="department" class="form-control" />
+            </div>
+            <div class="row">
+              <div class="col">
+                <button class="btn btn-primary">Add</button>
+                <input type="reset" value="Reset" class="btn btn-warning" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
