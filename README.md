@@ -77,4 +77,31 @@ You can use regular, browser-standard `fetch`, or you can include the Axios libr
 Also feel free to use either Promises or `async/await` as you see fit.
 
 - Relate the student country and the student provinces to each other
+  Both country and state/province should be drop-downs:
+
+```html
+<select>
+  <option value="1">Value 1</option>
+  <option value="2">Value 2</option>
+  <option value="3">Value 3</option>
+</select>
+```
+
+#### Part 1
+
+When a user picks a country, the state/province field should update to...
+US => US states
+Canada => Canadian provinces
+UK => state/province disappears
+
+#### Part 2
+
+And we should have tests for these cases!
+
+### For next week
+
 - Be able to add a student
+
+```
+
+```
