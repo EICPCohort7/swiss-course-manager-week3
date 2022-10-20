@@ -98,6 +98,10 @@ UK => state/province disappears
 
 And we should have tests for these cases!
 
+```shell
+npm install --save-dev jest-environment-jsdom
+```
+
 ### For next week
 
 - Be able to add a student
