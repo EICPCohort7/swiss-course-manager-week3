@@ -56,16 +56,15 @@
             <div class="mb-2">
               <label for="country" class="form-label">Country</label>
               <select name="country" id="country" class="form-select">
+                <option value="">Select a country</option>
                 <option value="CA">Canada</option>
                 <option value="UK">United Kingdom</option>
                 <option value="US">United States</option>
               </select>
             </div>
-            <div class="mb-2">
+            <div class="mb-2" hidden>
               <label for="province" class="form-label">State/Province</label>
-              <select name="province" id="province">
-                <option value="">Select a country</option>
-              </select>
+              <select name="province" id="province" class="form-select"></select>
             </div>
             <div class="mb-2">
               <label for="postal-code" class="form-label">Zip/Postal Code</label>
@@ -85,5 +84,6 @@
         </div>
       </div>
     </main>
+    <script src="js/add-student.js" type="module"></script>
   </body>
 </html>
