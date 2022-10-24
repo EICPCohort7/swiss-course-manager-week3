@@ -2,7 +2,7 @@ import { fireEvent, getByTestId, getByDisplayValue } from '@testing-library/dom'
 import '@testing-library/jest-dom';
 import { linkLists } from './link-lists.js';
 
-describe('add-student.js', () => {
+describe('link-lists.js', () => {
   /** @type {HTMLSelectElement} */
   let countriesSelect;
 
@@ -42,7 +42,7 @@ describe('add-student.js', () => {
     expect(provincesSelect).not.toBeVisible();
 
     linkLists(countriesSelect, provincesSelect);
-    let el = getByTestId(document, 'countries', { exact: false });
+    let el = getByTestId(document, 'countries');
     fireEvent.change(el, { target: { value: 'CA' } });
     expect(provincesSelect).toBeVisible();
 
@@ -55,7 +55,7 @@ describe('add-student.js', () => {
     expect(provincesSelect).not.toBeVisible();
 
     linkLists(countriesSelect, provincesSelect);
-    let el = getByTestId(document, 'countries', { exact: false });
+    let el = getByTestId(document, 'countries');
     fireEvent.change(el, { target: { value: 'US' } });
     expect(provincesSelect).toBeVisible();
 

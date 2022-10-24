@@ -92,7 +92,9 @@ let caProvinces = {
 function generateOptionsForLoop(states) {
   /** @type {HTMLOptionElement[]} */
   let options = [];
-  for (let abbreviation of Object.keys(states)) {
+  // for (let abbreviation of Object.keys(states)) {
+  // for-in implicitly goes over the keys of an object
+  for (let abbreviation in states) {
     let option = document.createElement('option');
     option.value = abbreviation;
     option.textContent = states[abbreviation];
@@ -119,6 +121,24 @@ function generateOptionsMap(states) {
 
 /**
  *
+ * @param {StateProvincesCollection} states
+ * @param {HTMLSelectElement} selectList
+ *
+ * Should be fine, since off-screen <option> elements should
+ * NOT provoke a redraw, which would slow down the UI
+ */
+function addProvinces(states, selectList) {
+  selectList.replaceChildren();
+  for (let abbreviation in states) {
+    selectList.insertAdjacentHTML(
+      'beforeend',
+      `<option value="${abbreviation}">${states[abbreviation]}</option>`
+    );
+  }
+}
+
+/**
+ *
  * @param {HTMLSelectElement} parentSelect The parent select list, changing the selection here will change the options in the child list
  * @param {HTMLSelectElement} childSelect The child select list
  */
@@ -126,6 +146,9 @@ export function linkLists(parentSelect, childSelect) {
   parentSelect.addEventListener('change', (event) => {
     if (event.target.value === 'CA') {
       childSelect.replaceChildren(...generateOptionsForLoop(caProvinces));
+
+      // Alternative, works fine for this use case
+      // addProvinces(caProvinces, childSelect);
       childSelect.parentElement.hidden = false;
     } else if (event.target.value === 'US') {
       childSelect.replaceChildren(...generateOptionsMap(usStates));
