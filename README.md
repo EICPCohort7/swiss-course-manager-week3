@@ -102,10 +102,22 @@ And we should have tests for these cases!
 npm install --save-dev jest-environment-jsdom
 ```
 
-### For next week
+### Getting data from a form
 
-- Be able to add a student
+The last of the week 3 assignments!
 
-```
+In `add-student.html`, hook up code to the "Add" button so that, when the form is submitted, you can package up the data of the form to send it to the server.
 
-```
+#### TODOs
+
+- The "Add" button has to be a submit button. Make its `type` "Submit"
+- Capture `submit` events on the form
+- Turn off the default behavior for `submit` events in your event handler
+  - Check out `preventDefault` in [javascript-examples/demos/events/event-cascade.html](https://github.com/johnpaxton/javascript-examples/blob/main/demos/events/event-cascade.html)
+  - Also check it out in MDN: [preventDefault](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault)
+- Create a FormData object from the data in the form
+  - Local demo: [javascript-examples/demos/forms-and-javascript.html](https://github.com/johnpaxton/javascript-examples/blob/main/demos/forms-and-javascript.html)
+  - MDN Docs: [FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData)
+- Log the data in the form to the console.
+  - In a later exercise, we will send this information to a server
+  - Until we actually send the data to the server, there isn't really a great way to test this code. So we can leave testing for that future exercise as well.
